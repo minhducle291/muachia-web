@@ -1,7 +1,7 @@
 import streamlit as st
 
 def show_sidebar():
-    if not st.session_state.get("logged_in", True):
+    if not st.session_state.get("logged_in", True): #Trả về Fale nếu muốn người dùng phải đăng nhập
         # 👉 Chỉ khi chưa đăng nhập mới tạo biến `hide` và áp dụng
         hide = """
             <style>
