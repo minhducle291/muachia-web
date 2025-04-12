@@ -1,0 +1,34 @@
+import streamlit as st
+
+def show_sidebar():
+    if not st.session_state.get("logged_in", True):
+        # 👉 Chỉ khi chưa đăng nhập mới tạo biến `hide` và áp dụng
+        hide = """
+            <style>
+                [data-testid="stSidebar"] {display: none;}
+                [data-testid="collapsedControl"] {display: none;}
+            </style>
+        """
+        st.markdown(hide, unsafe_allow_html=True)
+        st.warning("🔒 Bạn cần đăng nhập để xem nội dung.")
+        st.stop()  # ⛔ Dừng tại đây
+
+    # ✅ Phần này chỉ chạy khi đã đăng nhập — KHÔNG dùng biến `hide` ở đây!
+    # st.sidebar.subheader("Thông tin")
+    # st.sidebar.page_link("pages/thông tin 1.py", label="Bảng nhiệm vụ")
+    # st.sidebar.page_link("pages/thông tin 2.py", label="Tổng hợp tài liệu")
+
+    # st.sidebar.markdown("---")
+
+
+    st.sidebar.subheader("Báo cáo")
+    st.sidebar.page_link("pages/báo cáo 1.py", label="Báo cáo tổng hợp Fresh")
+    st.sidebar.page_link("pages/báo cáo 2.py", label="Báo cáo nhóm đạm")
+
+    st.sidebar.markdown("---")
+
+    st.sidebar.subheader("Công cụ")
+    st.sidebar.page_link("pages/công cụ 1.py", label="Kiểm tra nhu cầu siêu thị khai trương")
+    st.sidebar.page_link("pages/công cụ 2.py", label="Rải số mua đều")
+
+    st.sidebar.markdown("---")
