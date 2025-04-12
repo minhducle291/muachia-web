@@ -22,13 +22,13 @@ def show_sidebar():
 
 
     st.sidebar.subheader("Báo cáo")
-    st.sidebar.page_link("pages/báo cáo 1.py", label="Báo cáo tổng hợp Fresh")
-    st.sidebar.page_link("pages/báo cáo 2.py", label="Báo cáo nhóm đạm")
+    st.sidebar.page_link("pages/dashboard-1.py", label="Báo cáo tổng hợp Fresh")
+    st.sidebar.page_link("pages/dashboard-2.py", label="Báo cáo nhóm đạm")
 
     st.sidebar.markdown("---")
 
     st.sidebar.subheader("Công cụ")
-    st.sidebar.page_link("pages/công cụ 1.py", label="Kiểm tra nhu cầu siêu thị khai trương")
-    st.sidebar.page_link("pages/công cụ 2.py", label="Rải số mua đều")
+    st.sidebar.page_link("pages/tool-1.py", label="Kiểm tra nhu cầu siêu thị khai trương")
+    st.sidebar.page_link("pages/tool-2.py", label="Rải số mua đều")
 
     st.sidebar.markdown("---")
