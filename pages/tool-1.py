@@ -16,6 +16,10 @@ show_sidebar()
 # Tiêu đề trang
 st.title("Kiểm tra nhu cầu siêu thị khai trương")
 
+with open("tools/Kiểm tra nhu cầu siêu thị khai trương/Khai báo/list_opening_store.xlsx", "rb") as f:
+    file_bytes = f.read()
+
+st.download_button("Tải template", data=file_bytes, file_name="list_opening_store.xlsx")
 # Upload file
 uploaded_file = st.file_uploader("Chọn file Excel", type=["xlsx"])
 
@@ -23,7 +27,10 @@ if uploaded_file is not None:
     try:
         df_list_opening_store = pd.read_excel(uploaded_file)
         st.success("✅ Đã đọc file thành công!")
-        st.dataframe(df_list_opening_store, use_container_width=False)
+        #st.dataframe(df_list_opening_store, use_container_width=False)
+        count_sieuthi = len(df_list_opening_store['Mã siêu thị'].unique())
+        st.info(f"Đã ghi nhận thông tin {count_sieuthi} siêu thị.")
+        st.info("Chờ xíu nha!")
 
         #region Xử lí file theo danh sách người dùng upload
         #df = pd.read_parquet('/tools/Kiểm tra nhu cầu siêu thị khai trương/data.parquet')
