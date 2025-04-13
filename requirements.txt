@@ -1,2 +1,4 @@
 streamlit
 Pillow
+openpyxl
+pandas
