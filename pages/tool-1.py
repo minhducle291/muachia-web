@@ -27,8 +27,8 @@ if uploaded_file is not None:
 
         #region Xử lí file theo danh sách người dùng upload
         #df = pd.read_parquet('/tools/Kiểm tra nhu cầu siêu thị khai trương/data.parquet')
-        df = pd.read_parquet('/tools/Kiểm tra nhu cầu siêu thị khai trương/data.parquet')
-        df_list_opening_store = pd.read_excel('/tools/Kiểm tra nhu cầu siêu thị khai trương/Khai báo/list_opening_store.xlsx')
+        df = pd.read_parquet('tools/Kiểm tra nhu cầu siêu thị khai trương/data.parquet')
+        df_list_opening_store = pd.read_excel('tools/Kiểm tra nhu cầu siêu thị khai trương/Khai báo/list_opening_store.xlsx')
         df = pd.merge(df, df_list_opening_store, how = 'left', on = 'Mã siêu thị')
         df = df[~df['Ngày khai trương'].isna()]
         df_pivot = df.pivot_table(index=['Ngày khai trương','Ngày nhận hàng','Mã siêu thị','Tên siêu thị','Ngành hàng','Nhóm hàng 2'],
@@ -41,7 +41,7 @@ if uploaded_file is not None:
 
         df_pivot = df_pivot.sort_values(by=['Ngày khai trương','Mã siêu thị','Ngành hàng','Nhóm hàng 2','Ngày nhận hàng'],
                                         ascending=[True,True,True,True,True])
-        df_dsst = pd.read_excel('/tools/Kiểm tra nhu cầu siêu thị khai trương/Khai báo/Danh sách siêu thị.xlsx', usecols=['Mã siêu thị','Miền'])
+        df_dsst = pd.read_excel('tools/Kiểm tra nhu cầu siêu thị khai trương/Khai báo/Danh sách siêu thị.xlsx', usecols=['Mã siêu thị','Miền'])
         df_pivot = pd.merge(df_pivot, df_dsst[['Mã siêu thị','Miền']], how = 'left', on = 'Mã siêu thị')
         df_pivot['Miền'] = df_pivot['Miền'].fillna('Chưa cập nhật')
         df_pivot['Thứ (Khai trương)'] = pd.to_datetime(df_pivot['Ngày khai trương']).dt.day_name()
