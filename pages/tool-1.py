@@ -23,7 +23,7 @@ if uploaded_file is not None:
     try:
         df_list_opening_store = pd.read_excel(uploaded_file)
         st.success("✅ Đã đọc file thành công!")
-        st.dataframe(df_list_opening_store)
+        st.dataframe(df_list_opening_store, use_container_width=False)
 
         #region Xử lí file theo danh sách người dùng upload
         #df = pd.read_parquet('/tools/Kiểm tra nhu cầu siêu thị khai trương/data.parquet')
@@ -85,10 +85,6 @@ if uploaded_file is not None:
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
         # endregion
-
-
-
-
 
     except Exception as e:
         st.error(f"❌ Lỗi khi đọc file: {e}")
