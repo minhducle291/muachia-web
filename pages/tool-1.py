@@ -77,7 +77,7 @@ if uploaded_file is not None:
         def convert_df_to_excel(df_pivot):
             output = BytesIO()
             with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
-                df.to_excel(writer, index=False, sheet_name='Data')
+                df_pivot.to_excel(writer, index=False, sheet_name='Data')
             output.seek(0)  # Đưa con trỏ về đầu file
             return output.getvalue()
 
