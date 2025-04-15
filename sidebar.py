@@ -24,6 +24,7 @@ def show_sidebar():
     st.sidebar.subheader("Báo cáo")
     st.sidebar.page_link("pages/dashboard-1.py", label="Báo cáo tổng hợp Fresh")
     st.sidebar.page_link("pages/dashboard-2.py", label="Báo cáo nhóm đạm")
+    st.sidebar.page_link("pages/dashboard-3.py", label="Báo cáo thử nghiệm")
 
     st.sidebar.markdown("---")
 
