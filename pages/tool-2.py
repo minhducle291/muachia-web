@@ -12,3 +12,4 @@ show_sidebar()
 
 # Tiêu đề trang
 st.title("Rải số mua đều")
+st.header("Comming soon!")

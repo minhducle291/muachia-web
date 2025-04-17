@@ -12,3 +12,4 @@ show_sidebar()
 
 # Tiêu đề trang
 st.title("Dashboard tổng hợp Fresh")
+st.header("Comming soon!")
