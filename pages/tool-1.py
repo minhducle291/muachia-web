@@ -35,7 +35,7 @@ if uploaded_file is not None:
         #region Xử lí file theo danh sách người dùng upload
         #df = pd.read_parquet('/tools/Kiểm tra nhu cầu siêu thị khai trương/data.parquet')
         df = pd.read_parquet('tools/Kiểm tra nhu cầu siêu thị khai trương/data.parquet')
-        df_list_opening_store = pd.read_excel('tools/Kiểm tra nhu cầu siêu thị khai trương/Khai báo/list_opening_store.xlsx')
+        #df_list_opening_store = pd.read_excel('tools/Kiểm tra nhu cầu siêu thị khai trương/Khai báo/list_opening_store.xlsx')
         df = pd.merge(df, df_list_opening_store, how = 'left', on = 'Mã siêu thị')
         df = df[~df['Ngày khai trương'].isna()]
         df_pivot = df.pivot_table(index=['Ngày khai trương','Ngày nhận hàng','Mã siêu thị','Tên siêu thị','Ngành hàng','Nhóm hàng 2'],
