@@ -3,3 +3,7 @@ Pillow
 openpyxl
 pandas
 xlsxwriter
+numpy
+duckdb
+tqdm
+psutil

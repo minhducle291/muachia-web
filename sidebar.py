@@ -30,6 +30,6 @@ def show_sidebar():
 
     st.sidebar.subheader("Công cụ")
     st.sidebar.page_link("pages/tool-1.py", label="Kiểm tra nhu cầu siêu thị khai trương")
-    st.sidebar.page_link("pages/tool-2.py", label="Rải số mua đều")
+    st.sidebar.page_link("pages/tool-rai-so.py", label="Rải số mua đều")
 
     st.sidebar.markdown("---")
