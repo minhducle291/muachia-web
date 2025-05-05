@@ -7,4 +7,3 @@ numpy
 duckdb
 tqdm
 psutil
-json
