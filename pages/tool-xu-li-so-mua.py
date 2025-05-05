@@ -114,7 +114,7 @@ def xu_ly_du_lieu(df_khaibao):
                                 'Ngày': count_distinct
                             }).reset_index()
     df_pivot.rename(columns={'Mã sản phẩm gộp':'Mã sản phẩm','Tên sản phẩm gộp':'Tên sản phẩm','Ngày':'Số ngày tính SB'}, inplace=True)
-    df_quydoikg = pd.read_excel(r'external data\Danh sách sản phẩm.xlsx', usecols=['Mã sản phẩm','Trọng lượng (kg)'])
+    df_quydoikg = pd.read_excel('external data/Danh sách sản phẩm.xlsx', usecols=['Mã sản phẩm','Trọng lượng (kg)'])
     df_quydoikg['Trọng lượng (kg)'] = df_quydoikg['Trọng lượng (kg)'].replace(0, 1)
     df_pivot = pd.merge(df_pivot, df_quydoikg, on='Mã sản phẩm', how='left')
     df_pivot['Sức bán chuẩn'] = df_pivot['Nguyên giá (KG)'] / df_pivot['Trọng lượng (kg)']
@@ -130,10 +130,10 @@ def xu_ly_du_lieu(df_khaibao):
 
     # region Map dữ liệu quy cách, phân loại chủ lực, tính tồn kho qua đêm vào bảng tính số mua
     df_pivot = pd.merge(df_pivot, df_808[['Mã siêu thị','Mã sản phẩm','Quy cách mua']], on=['Mã siêu thị','Mã sản phẩm'], how='left')
-    df_chuluc = pd.read_excel(r'external data\Danh sách sản phẩm chủ lực.xlsx', sheet_name='Final', usecols=['Nhóm sản phẩm','Phân loại tổng'])
+    df_chuluc = pd.read_excel('external data/Danh sách sản phẩm chủ lực.xlsx', sheet_name='Final', usecols=['Nhóm sản phẩm','Phân loại tổng'])
     df_pivot = pd.merge(df_pivot, df_chuluc, left_on='Gom code', right_on='Nhóm sản phẩm', how='left')
     df_pivot.drop(columns='Nhóm sản phẩm', inplace=True)
-    df_tinhtonquadem = pd.read_excel(r'external data\Danh sách sản phẩm.xlsx', usecols=['Mã sản phẩm','Tính tồn kho qua đêm'])
+    df_tinhtonquadem = pd.read_excel('external data/Danh sách sản phẩm.xlsx', usecols=['Mã sản phẩm','Tính tồn kho qua đêm'])
     df_pivot = pd.merge(df_pivot, df_tinhtonquadem, on='Mã sản phẩm', how='left')
     # endregion
 
