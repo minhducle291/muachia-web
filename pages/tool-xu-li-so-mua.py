@@ -76,13 +76,13 @@ to_date = end_date.strftime('%Y%m%d')
 
 def xu_ly_du_lieu(df_khaibao):
     st.info(f"Đang xử lý...chờ chút nhé!")
-    df_final = pd.read_parquet(r'tools\Xử lí số mua thuỷ sản\local data\data-detail-735-827-951.parquet')
+    df_final = pd.read_parquet('tools/Xử lí số mua thuỷ sản/local data/data-detail-735-827-951.parquet')
     df_final['Ngày'] = pd.to_datetime(df_final['Ngày'], format='%Y%m%d')
 
     df_final = df_final[(df_final['Ngày'] >= from_date) & (df_final['Ngày'] <= to_date)]
-    df_808 = pd.read_parquet(r'tools\Xử lí số mua thuỷ sản\local data\data-quycachmua-tonmin.parquet')
-    df_lichvehang = pd.read_parquet(r'tools\Xử lí số mua thuỷ sản\local data\data-lichvehang.parquet')
-    df_muadeu = pd.read_parquet(r'tools\Xử lí số mua thuỷ sản\local data\data-muadeu.parquet')
+    df_808 = pd.read_parquet('tools/Xử lí số mua thuỷ sản/local data/data-quycachmua-tonmin.parquet')
+    df_lichvehang = pd.read_parquet('tools/Xử lí số mua thuỷ sản/local data/data-lichvehang.parquet')
+    df_muadeu = pd.read_parquet('tools/Xử lí số mua thuỷ sản/local data/data-muadeu.parquet')
 
     # region Tính tỉ lệ NG/Nhập
     df_nhap = df_final.copy()
