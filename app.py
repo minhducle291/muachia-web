@@ -19,13 +19,13 @@ if st.session_state.logged_in:
 
 # Hàm xác thực tài khoản
 def check_login(username, password):
-    return username == "admin" and password == "1234"
+    return username == "admin" and password == "bhx"
 
 # Trang đăng nhập
 def login_page():
     st.title("Đăng nhập")
-    username = st.text_input("Tài khoản", value="admin")
-    password = st.text_input("Mật khẩu", type='password', value="1234")
+    username = st.text_input("Tài khoản")
+    password = st.text_input("Mật khẩu", type='password')
     submitted = st.button("Đăng nhập")
 
     if submitted:
