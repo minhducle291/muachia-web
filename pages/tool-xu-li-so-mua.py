@@ -101,7 +101,7 @@ def xu_ly_du_lieu(df_khaibao):
     # region Tính sức bán, Tỉ lệ bán NG/Nhập
     df_detail = df_final.copy()
     df_detail = df_detail[df_detail['là ngày tính sức bán'] == 'yes']
-    df_detail['Nguyên giá (KG)'].fillna(0, inplace=True)
+    df_detail['Nguyên giá (KG)'] = df_detail['Nguyên giá (KG)'].fillna(0, inplace=True)
 
     # Sum số bán lại theo tổng ngày trước
     df_detail_2 = pd.pivot_table(df_detail, index=['Ngày','Mã siêu thị','Gom code','Mã sản phẩm gộp','Tên sản phẩm gộp'],
@@ -135,6 +135,7 @@ def xu_ly_du_lieu(df_khaibao):
     # region Map dữ liệu quy cách, phân loại chủ lực, tính tồn kho qua đêm vào bảng tính số mua
     df_pivot = pd.merge(df_pivot, df_808[['Mã siêu thị','Mã sản phẩm','Quy cách mua']], on=['Mã siêu thị','Mã sản phẩm'], how='left')
     df_chuluc = pd.read_excel('external data/Danh sách sản phẩm chủ lực.xlsx', sheet_name='Final', usecols=['Nhóm sản phẩm','Phân loại tổng'])
+    
     df_pivot = pd.merge(df_pivot, df_chuluc, left_on='Gom code', right_on='Nhóm sản phẩm', how='left')
     df_pivot.drop(columns='Nhóm sản phẩm', inplace=True)
     df_tinhtonquadem = pd.read_excel('external data/Danh sách sản phẩm.xlsx', usecols=['Mã sản phẩm','Tính tồn kho qua đêm'])
