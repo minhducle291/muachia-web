@@ -15,7 +15,7 @@ import openpyxl
 from io import BytesIO
 # endregion
 
-# region Khai báo hàm
+# region Khai báo hàm và tham số
 def mround(n, quycach, rate=0.5):
     phan_nguyen = n // quycach
     phan_du = n % quycach
@@ -24,13 +24,14 @@ def mround(n, quycach, rate=0.5):
     else:
         number = phan_nguyen * quycach
     return number
-# endregion
 
 # Tham số
 rate_nhap = 0.8
 rate_da_dang = 0.5
 rate_chu_luc = 0.5
+# endregion
 
+# region Cấu hình Streamlit
 # Cấu hình trang Streamlit
 st.set_page_config(page_title="Team mua chia Bách hóa XANH", layout="wide", initial_sidebar_state="auto", page_icon="assets/logo.png")
 apply_custom_styles()
@@ -38,6 +39,7 @@ hide_default_sidebar()
 
 # Hiển thị sidebar khi đã đăng nhập
 show_sidebar()
+# endregion
 
 # Tiêu đề trang
 st.title("Cook số thuỷ sản 🐟")
@@ -75,6 +77,7 @@ to_date = end_date.strftime('%Y%m%d')
 # endregion
 
 def xu_ly_du_lieu(df_khaibao):
+    # region Đọc file đã xử lí từ local
     st.info(f"Đang xử lý...chờ chút nhé!")
     df_final = pd.read_parquet('tools/Xử lí số mua thuỷ sản/local data/data-detail-735-827-951.parquet')
     df_final['Ngày'] = pd.to_datetime(df_final['Ngày'], format='%Y%m%d')
@@ -83,6 +86,7 @@ def xu_ly_du_lieu(df_khaibao):
     df_808 = pd.read_parquet('tools/Xử lí số mua thuỷ sản/local data/data-quycachmua-tonmin.parquet')
     df_lichvehang = pd.read_parquet('tools/Xử lí số mua thuỷ sản/local data/data-lichvehang.parquet')
     df_muadeu = pd.read_parquet('tools/Xử lí số mua thuỷ sản/local data/data-muadeu.parquet')
+    # endregion
 
     # region Tính tỉ lệ NG/Nhập
     df_nhap = df_final.copy()
@@ -213,12 +217,10 @@ def xu_ly_du_lieu(df_khaibao):
         json_data = json.dumps(steps, ensure_ascii=False)
         
         return so_luong_tuan, json_data
-
     # Áp dụng hàm lên DataFrame
     results = df_pivot.apply(Tinh_so_luong_tuan_thuysan, axis=1, result_type='expand')
     df_pivot['Số lượng tuần'] = results[0]
     df_pivot['jsondata'] = results[1]
-    # endregion
 
     # region Thêm thông tin mua đều hiện tại
     df_muadeu['Tổng tuần hiện tại'] = df_muadeu[['T2','T3','T4','T5','T6','T7','CN']].sum(axis=1)
@@ -227,7 +229,7 @@ def xu_ly_du_lieu(df_khaibao):
     df_pivot['Tổng tuần hiện tại'].fillna(df_pivot['Số lượng tuần'], inplace=True)
     # endregion
 
-    
+    # region Xử lí thông tin người dùng khai báo
     df_khaibao['Mã sản phẩm'] = df_khaibao['Mã sản phẩm'].fillna(-1).astype('int64')
     df_khaibao_single = df_khaibao[df_khaibao['Tên sản phẩm'] != 'all']
 
@@ -258,7 +260,7 @@ def xu_ly_du_lieu(df_khaibao):
     df_khaibao['Result'] = df_khaibao.apply(Xu_li_so_mua, axis=1)
     df_khaibao.loc[df_khaibao['Phân loại'] != 'Sức bán', ['Số ngày tính SB', 'Số lượng tuần', 'jsondata']] = np.nan
     return df_khaibao
-
+    # endregion
 
 
 # Chỉ hiển thị nút nếu đã có file
@@ -266,6 +268,7 @@ if uploaded_file is not None:
     if st.button("Cook now!"):
         df = xu_ly_du_lieu(df_khaibao)
         st.dataframe(df, use_container_width=True, height=400)
+
         # region Button tải xuống
         # Thêm nút tải xuống
         @st.cache_data
